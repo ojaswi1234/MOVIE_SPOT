@@ -1,0 +1,60 @@
+<div class="flex mt-24 justify-center text-center w-[550px] sm:w-fit h-fit px-28 sm:px-44 py-32 justify-self-center">
+    <h1 class="poppins-extrabold sm:text-6xl text-5xl text-center">
+        Welcome to MovieSpot!<br/>Your Ultimate Movie Guide
+    </h1>
+</div>
+<div class="flex flex-col mt-20 justify-center text-center w-[440px] sm:w-fit h-fit justify-self-center text-white">
+    <h1 class="poppins-bold text-center text-lg sm:text-3xl ">Discover the best movies of all time</h1>
+    <form action="{% url 'landing' %}" method="GET" class="w-[44px] sm:w-fit h-fit flex flex-row justify-center items-center justify-self-center mt-10 pb-10 ml-[45%] sm:ml-28" id="movie-div">
+        {% csrf_token %}
+        <select 
+            name="category"  
+            class="no-arrow w-[100px] sm:w-auto h-[44px] sm:h-[58px] text-center text-md sm:text-lg font-medium outline-none bg-gradient-to-r from-green-400 to-lime-400 text-black rounded-l-full border-2 border-lime-500 focus:outline-none shadow-md ">
+            <option class="text-black bg-white" value="popular">Popular</option>
+            <option class="text-black bg-white" value="now_playing">Now Playing</option>
+            <option class="text-black bg-white"value="top_rated">Top Rated</option>
+            <option class="text-black bg-white" value="upcoming">Upcoming</option>
+        </select>
+        <input 
+            type="text" 
+            name="search" 
+            id="search" 
+            class="w-[200px] h-[44px] sm:w-[900px] sm:h-[58px] text-start text-md sm:text-lg bg-white text-black outline-none p-4 rounded-none border-t-2 border-b-2 border-l-0 border-r-0 border-lime-500 focus:outline-none"
+            placeholder="Search for a movie...." />
+        <button 
+            type="submit" 
+            onclick="this.form.submit()"
+            class="bg-gradient-to-r from-lime-500 to-green-500 text-black rounded-r-full p-4 w-36 h-[44px] sm:h-[58px] text-lg font-bold flex justify-center items-center cursor-pointer hover:scale-105 transition-all ease-in-out shadow-md hover:shadow-lg">
+            <svg 
+                aria-hidden="true" 
+                data-prefix="fal" 
+                data-icon="search" 
+                role="img" 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 512 512" 
+                class="svg-inline--fa fa-search fa-w-16 fa-7x w-6 h-6">
+                <path 
+                    fill="currentColor" 
+                    d="M508.5 481.6l-129-129c-2.3-2.3-5.3-3.5-8.5-3.5h-10.3C395 312 416 262.5 416 208 416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c54.5 0 104-21 141.1-55.2V371c0 3.2 1.3 6.2 3.5 8.5l129 129c4.7 4.7 12.3 4.7 17 0l9.9-9.9c4.7-4.7 4.7-12.3 0-17zM208 384c-97.3 0-176-78.7-176-176S110.7 32 208 32s176 78.7 176 176-78.7 176-176 176z">
+                </path>
+            </svg>
+        </button>
+    </form>
+    <div class=" w-[450px] sm:w-fit h-full grid grid-cols-1 sm:grid-cols-3 col-span-3 gap-5 sm:gap-8 mt-10 justify-center items-center justify-self-center sm:p-10 sm:px-14 px-16" >
+        <!--{% if error_message %}
+        <h1 class="poppins-extrabold flex justify-self-center place-self-center">{{ error_message }}</h1>
+        {% endif %}-->
+
+        {% for movie in movies %}
+        <a href="#" class="text-decoration-none" >
+        <div class="flex flex-col justify-center items-center size-52 sm:size-fit w-fit h-fit mt-10  rounded-lg shadow-md p-5 sm:p-3 bg-white/8 sm:bg-white/4">
+            <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }}" class="w-[300px] h-[300px] rounded-lg shadow-md mt-4"/>
+            <h1 class="poppins-bold text-xl mt-4 text-white">{{ movie.title }}</h1>
+            <p class="poppins-regular text-md text-black mt-2 h-fit p-2 bg-white rounded-2xl flex flex-row justify-center items-center">{{ movie.vote_average|floatformat:1 }} <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="size-8 mx-1"><path fill="#BA8E23" d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg><b class="text-lg ">/10</b></p>
+            <p class="poppins-regular text-md text-gray-300 mt-2 h-[250px]  pb-10">{{ movie.overview }}</p>
+        </div>
+    </a>
+        {% endfor %}
+        
+    </div>
+</div>

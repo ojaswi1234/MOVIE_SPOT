@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head> 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');   
+    .poppins-extrabold {
+      font-family: "Poppins", sans-serif;
+      font-weight: 800;
+      font-style: normal;
+      background: radial-gradient(circle,rgb(0, 234, 238) 0%,rgb(245, 253, 0) 100%, rgb(0, 234, 238) 0%, rgb(245, 253, 0) 100%);
+      -webkit-background-clip: text;
+      background-size: 200%;
+      -webkit-text-fill-color: transparent;
+        animation: hue 2s linear infinite;
+        text-shadow: 1px 1px 200px yellow;
+    }
+    @keyframes hue{
+         to{
+            background-position: 200%;
+         }
+    }
+    .poppins-bold {
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      
+    }
+    .no-arrow{
+        appearance: none;
+    }
+    
+    
+</style>
+
+<body class="overflow-x-hidden w-screen h-screen">
+    <main class="w-screen h-screen overflow-x-hidden bg-black p-10 sm:p-0">
+        {% block navbar %}
+        {% include 'includes/navbar.html' %}
+        {% endblock %}
+
+        {% block content %}
+         {% include 'includes/content.html'%}
+        {% endblock %}
+        
+    </main>
+</body>
+</html>
