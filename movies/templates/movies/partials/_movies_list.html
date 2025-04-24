@@ -1,8 +1,8 @@
 
-         {% if error_message %}
+         <!--{% if error_message %}
         <h1 class="poppins-extrabold translate-x-[140%] text-xl">{{ error_message }}</h1>
-
-        {% else %}
+        {% endif %}-->
+        
         {% for movie in movies %}
         <a href="#" class="text-decoration-none" >
         <div class="flex flex-col justify-center items-center size-52 sm:size-fit w-fit h-fit mt-10  rounded-lg shadow-md p-7 sm:p-3 bg-white/10 sm:bg-white/4">
@@ -16,4 +16,4 @@
         <div id="scroll-trigger" hx-get="{% url 'landing' %}?category={{ category }}&search={{ search_query|urlencode }}&page={{ next_page }}" hx-target="#movie-div" hx-swap="beforeend" hx-trigger="revealed" class="flex justify-center items-center w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] rounded-lg shadow-md bg-white/8 sm:bg-white/4 mt-10">
             <h1 class="poppins-bold text-xl text-center text-white">Load More</h1>
         </div>  
-        {% endif %}
+      
