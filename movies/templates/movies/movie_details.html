@@ -2,12 +2,23 @@
 
 {% block content %}
 <div class="text-white flex flex-col lg:flex-row justify-around items-center mt-8 lg:mt-16 pb-8 gap-8 lg:gap-0 px-4">
-    <video>
-        <source src="{% static 'videos/movie.mp4' %}" type="video/mp4">
-    </video>
-    <img src="{% if movie.poster_path %}https://image.tmdb.org/t/p/w500{{ movie.poster_path }}{% else %}https://cedarsrestaurantsouth.com/Builder/images/no-product-image.jpg{% endif %}" alt="{{ movie.title }}" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-[450px] lg:h-[550px] object-cover rounded-lg shadow-sm mb-6 lg:mb-0"/>
+     
+    <img src="{% if movie.poster_path %}https://image.tmdb.org/t/p/w500{{ movie.poster_path }}{% else %}https://cedarsrestaurantsouth.com/Builder/images/no-product-image.jpg{% endif %}" alt="{{ movie.title }}" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-[450px] lg:h-[550px] object-cover rounded-lg shadow-sm mb-6 lg:mb-0 flex place-self-start"/>
     <aside class="flex flex-col gap-6 justify-center items-start w-full max-w-xl h-fit p-4 sm:p-6 md:p-8 lg:p-10 bg-gradient-to-br from-[#232526]/80 via-[#414345]/70 to-[#232526]/90 rounded-3xl shadow-2xl backdrop-blur-2xl border border-white/10">
         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-3 tracking-tight drop-shadow-xl">{{ movie.title }}</h1>
+        <h2>
+            <span class="text-sm sm:text-md text-gray-300 font-semibold  bg-gradient-to-r from-cyan-600 to-green-500 px-3 py-1 sm:px-4 rounded-full">Directors</span>
+            <span class="text-sm sm:text-md text-gray-200 font-medium ml-3">
+               {% for member in credits.crew %}
+               {% if member.job == "Director" %}
+                {{ member.name }}
+               {% endif %}
+               {% empty %}
+                No director information available
+               {% endfor %}
+            </span>
+        </h2>
+        <h3 class="text-lg sm:text-xl text-gray-400 font-semibold mb-2 font-serif"> <blockquote> "{{ movie.tagline }}" </blockquote> </h3>
         <p class="font-light text-sm sm:text-base text-gray-200 mt-2 text-left px-0 leading-relaxed">{{ movie.overview|truncatewords:80 }}</p>
         <div class="flex flex-col flex-wrap gap-5 mb-3">
         <div class="flex items-center gap-2">
@@ -37,8 +48,13 @@
             <span class="text-xs sm:text-sm text-gray-200 bg-gray-800/70 px-2 sm:px-3 py-1 rounded-lg font-medium">Language: {{ movie.original_language|upper }}</span>
             <span class="text-xs sm:text-sm text-gray-200 bg-gray-800/70 px-2 sm:px-3 py-1 rounded-lg font-medium">Status: {{ movie.status }}</span>
         </div>
-        <div class="flex flex-col sm:flex-row gap-4 mt-4">
-           
+        <div class="flex flex-col sm:flex-col gap-2 mt-4 ">
+            <h2>Cast:</h2>
+            {% for member in credits.cast %}
+            <li > <b>{{ member.name }}</b> as {{ member.character }}</li>
+            {% empty %}
+            <li>No cast information available</li>
+            {% endfor %} 
         </div>
     </aside>
 </div>

@@ -55,14 +55,19 @@ def landingPage(request):
 
 def movieDetails(request, movie_id):
     movie_detail_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={settings.TMDB_API_KEY}"
+    movie_credit_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={settings.TMDB_API_KEY}"
     error_message = None
     try:
+        movie_credit_response = requests.get(movie_credit_url)
+        movie_credit_response.raise_for_status()  # Raise an error for bad status codes
+        credits_data = movie_credit_response.json() 
         response = requests.get(movie_detail_url)
         response.raise_for_status()  # Raise an error for bad status codes
         data = response.json()
     except requests.exceptions.RequestException as e:
         data =[]
+        credits_data = []
         error_message = f"Oops!! Something went wrong!"
 
-    return render(request, 'movies/movie_details.html', {"movie": data, error_message: error_message})
+    return render(request, 'movies/movie_details.html', {"movie": data, error_message: error_message, "credits": credits_data})
 
