@@ -54,8 +54,9 @@ def landingPage(request):
 
 
 def movieDetails(request, movie_id):
-    movie_detail_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={settings.TMDB_API_KEY}"
-    movie_credit_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={settings.TMDB_API_KEY}"
+    movie_detail_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}"
+    movie_credit_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={API_KEY}"
+    movie_trailer_url = f"https://api.themoviedb.org/3/movie/{movie_id}/videos?api_key={API_KEY}"
     error_message = None
     try:
         movie_credit_response = requests.get(movie_credit_url)
@@ -64,10 +65,19 @@ def movieDetails(request, movie_id):
         response = requests.get(movie_detail_url)
         response.raise_for_status()  # Raise an error for bad status codes
         data = response.json()
+        trailer_response = requests.get(movie_trailer_url)
+        trailer_response.raise_for_status()  # Raise an error for bad status codes
+        trailer_data = trailer_response.json().get('results', [])
+
+        trailers = [video for video in trailer_data if video.get('site') == 'YouTube' and video.get('type') == 'Trailer']
+        
     except requests.exceptions.RequestException as e:
         data =[]
+        trailers = []
         credits_data = []
+        trailer_data = []
+
         error_message = f"Oops!! Something went wrong!"
 
-    return render(request, 'movies/movie_details.html', {"movie": data, error_message: error_message, "credits": credits_data})
+    return render(request, 'movies/movie_details.html', {"movie": data, error_message: error_message, "credits": credits_data, "trailers": trailers})
 

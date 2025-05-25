@@ -1,9 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% load static %}
 <div class="text-white flex flex-col lg:flex-row justify-around items-center mt-8 lg:mt-16 pb-8 gap-8 lg:gap-0 px-4">
-     
-    <img src="{% if movie.poster_path %}https://image.tmdb.org/t/p/w500{{ movie.poster_path }}{% else %}https://cedarsrestaurantsouth.com/Builder/images/no-product-image.jpg{% endif %}" alt="{{ movie.title }}" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-[450px] lg:h-[550px] object-cover rounded-lg shadow-sm mb-6 lg:mb-0 flex place-self-start"/>
+     <aside class="flex flex-col gap-4 place-self-start w-full max-w-xl h-fit p-4 sm:p-6 md:p-8 lg:p-10 ">
+    <img src="{% if movie.poster_path %}https://image.tmdb.org/t/p/w500{{ movie.poster_path }}{% else %}https://cedarsrestaurantsouth.com/Builder/images/no-product-image.jpg{% endif %}" alt="{{ movie.title }}" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-[450px] lg:h-[650px] object-cover rounded-lg shadow-sm mb-6 lg:mb-0 flex place-self-start"/>
+
+    <span class="relative translate-x-10 lg:translate-x-14 w-full h-fit mt-10 flex flex-col gap-4">
+            {% for video in trailers %}
+                {% if forloop.counter <= 2 %}  <!-- Limit to 2 trailers -->
+                    <a href="https://www.youtube.com/watch?v={{ video.key }}" id="trailer-span-{{ forloop.counter }}" class="flex items-center justify-center w-2/3 h-full text-white bg-red-500 rounded-lg hover:bg-red-600 transition duration-300 ease-in-out p-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                            <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                        </svg>
+                        <span class="ml-2">Watch Trailer {{ forloop.counter }}</span>
+                    </a>
+                {% endif %}
+            {% empty %}
+                <span class="flex items-center justify-center w-2/3 h-full text-white bg-gray-500 rounded-lg p-2 cursor-not-allowed opacity-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                        <path d="M10 16.5l6-4.5-6-4.5v9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    </svg>
+                    <span class="ml-2">No Trailer Available</span>
+                </span>
+            {% endfor %}
+        </span>
+     </aside>
     <aside class="flex flex-col gap-6 justify-center items-start w-full max-w-xl h-fit p-4 sm:p-6 md:p-8 lg:p-10 bg-gradient-to-br from-[#232526]/80 via-[#414345]/70 to-[#232526]/90 rounded-3xl shadow-2xl backdrop-blur-2xl border border-white/10">
         <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-3 tracking-tight drop-shadow-xl">{{ movie.title }}</h1>
         <h2>
@@ -48,10 +70,10 @@
             <span class="text-xs sm:text-sm text-gray-200 bg-gray-800/70 px-2 sm:px-3 py-1 rounded-lg font-medium">Language: {{ movie.original_language|upper }}</span>
             <span class="text-xs sm:text-sm text-gray-200 bg-gray-800/70 px-2 sm:px-3 py-1 rounded-lg font-medium">Status: {{ movie.status }}</span>
         </div>
-        <div class="flex flex-col sm:flex-col gap-2 mt-4 ">
+        <div class="flex flex-col  gap-2 mt-4 ">
             <h2>Cast:</h2>
-            {% for member in credits.cast %}
-            <li > <b>{{ member.name }}</b> as {{ member.character }}</li>
+            {% for member in credits.cast|slice:10 %}
+            <li> <b>{{ member.name }}</b> as {{ member.character }}</li>
             {% empty %}
             <li>No cast information available</li>
             {% endfor %} 

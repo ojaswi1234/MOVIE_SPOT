@@ -4,7 +4,7 @@
     </h1>
 </div>
 <div class="flex flex-col mt-20 justify-center text-center w-[440px] sm:w-fit h-fit  text-white mb-4">
-    <h1 class="poppins-bold text-start  sm:text-center text-lg sm:text-3xl translate-x-0 lg:translate-x-20">Discover the best movies of all time</h1>
+    <h1 class="poppins-bold text-start sm:text-center text-lg sm:text-3xl translate-x-0 sm:translate-x-14 md:translate-x-20  lg:translate-x-20">Discover the best movies of all time</h1>
     <form action="{% url 'landing' %}" method="GET" class="w-[44px] -translate-x-14 md:-translate-x-56 lg:-translate-x-0 md:w-[600px]  lg:w-fit h-fit flex flex-row justify-center items-center justify-self-center mt-10 pb-10 ml-[45%] lg:ml-28" id="movie-div">
         {% csrf_token %}
         <select 
@@ -45,7 +45,7 @@
             </svg>
         </button>
     </form>
-    <div id="movie-div" class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 md:p-8 lg:p-10 lg:translate-x-10 -translate-x-14">
+    <div id="movie-div" class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 md:p-8 lg:p-10 sm:translate-x-14 lg:translate-x-14 -translate-x-14">
      {% include "movies/partials/_movies_list.html" %}
     </div>
 </div>
