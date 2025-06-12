@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block title %}Movie Page{% endblock %}
+
+{% block content %}
+<div class="w-screen pb-24"></div>
+<form action="{% url 'movie_page' %}" method="GET" class="w-[300px] md:w-screen h-fit flex flex-row justify-center items-center justify-self-center mt-10 pb-10 " id="movie-div">
+        {% csrf_token %}
+        <select 
+            name="category"  
+            class="no-arrow w-[100px] sm:w-auto px-0 lg:px-2 h-[44px] sm:h-[58px] text-center text-md sm:text-lg font-medium outline-none bg-gradient-to-r from-green-400 to-lime-400 text-black rounded-l-full border-2 border-lime-500 focus:outline-none shadow-md " hx-get="{% url 'landing' %}" hx-target="#movie-div"  hx-swap="innerHTML" hx-trigger="change from:select" id="category-select" onChange="this.form.submit()">
+            <option class="text-black bg-white" value="popular" {% if category == 'popular' %} selected {% endif %}> Popular </option>
+            <option class="text-black bg-white" value="now_playing" {% if category == 'now_playing' %} selected {% endif %}>Now Playing</option>
+            <option class="text-black bg-white"value="top_rated"  {% if category == 'top_rated' %} selected {% endif %}>Top Rated</option>
+            <option class="text-black bg-white" value="upcoming"  {% if category == 'upcoming' %} selected {% endif %}>Upcoming</option>
+        </select>
+        <input 
+            type="text" 
+            name="search" 
+            id="search" 
+            hx-get="{% url 'landing' %}?category={{ category }}&search={{ search_query|urlencode }}"
+           
+            value="{{ search_query }}"
+            
+            class="w-[200px] h-[44px] md:w-[500px] md:h-[58px] 
+            lg:w-[900px] lg:h-[58px] text-start text-md lg:text-lg bg-transparent text-lime-400 outline-none p-4 rounded-none border-t-2 border-b-2 border-l-0 border-r-0 border-lime-500 focus:outline-none"
+            placeholder="Search for a movie...." />
+        <button 
+            type="submit" 
+            onclick="this.form.submit()"
+            class="bg-gradient-to-r from-lime-500 to-green-500 text-black rounded-r-full p-4 w-36 h-[44px] sm:h-[58px] text-lg font-bold flex justify-center items-center cursor-pointer hover:scale-105 transition-all duration-1s ease-in-out shadow-md hover:bg-gradient-to-l from-lime-500 to-green-500">
+            <svg 
+                aria-hidden="true" 
+                data-prefix="fal" 
+                data-icon="search" 
+                role="img" 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 512 512" 
+                class="svg-inline--fa fa-search fa-w-16 fa-7x w-6 h-6">
+                <path 
+                    fill="currentColor" 
+                    d="M508.5 481.6l-129-129c-2.3-2.3-5.3-3.5-8.5-3.5h-10.3C395 312 416 262.5 416 208 416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c54.5 0 104-21 141.1-55.2V371c0 3.2 1.3 6.2 3.5 8.5l129 129c4.7 4.7 12.3 4.7 17 0l9.9-9.9c4.7-4.7 4.7-12.3 0-17zM208 384c-97.3 0-176-78.7-176-176S110.7 32 208 32s176 78.7 176 176-78.7 176-176 176z">
+                </path>
+            </svg>
+        </button>
+    </form>
+    <div id="movie-div" class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 md:p-8 lg:p-10 ">
+     {% include "movies/partials/_movies_list.html" %}
+    </div>
+{% endblock %}

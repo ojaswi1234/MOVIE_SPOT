@@ -17,6 +17,19 @@
         input:focus {
             box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.3);
         }
+        
+        .animated-gradient {
+            background: radial-gradient(circle at bottom,rgba(255, 255, 255, 0.55),rgba(178, 219, 0, 0.51),rgb(1, 128, 128));
+            background-size: 400% 400%;
+            animation: gradientAnimation 7s ease alternate-reverse infinite;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%;  }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            0% { background-position: 0% 50%;  }
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-cyan-900/50 px-4">
@@ -46,7 +59,7 @@
             {% endfor %}
             <button
                 type="submit"
-                class="w-full bg-gradient-to-r from-cyan-500 to-yellow-500 hover:from-cyan-600 hover:to-yellow-600 text-black px-4 py-3 rounded-lg font-bold shadow-md transition duration-300 ease-in-out"
+                class="w-1/2 bg-white hover:bg-gradient-to-tr hover:from-cyan-600 hover:to-yellow-600 hover:text-white  text-black px-4 py-3 rounded-lg font-bold shadow-md transition duration-700 ease-in-out flex justify-self-center justify-center mx-auto animated-gradient"
             >
                 Sign Up
             </button>

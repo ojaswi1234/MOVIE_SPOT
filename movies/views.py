@@ -3,9 +3,15 @@ from django.conf import settings
 import requests
 
 API_KEY = settings.TMDB_API_KEY
+
 # Create your views here.
 def landingPage(request):
+    return render(request, 'movies/landing_page.html')
    
+
+   
+def moviePage(request):
+    
     category = request.GET.get('category', 'popular')
     search_query = request.GET.get("search","")
     page = int(request.GET.get('page', 1))
@@ -42,7 +48,7 @@ def landingPage(request):
         })
     
     
-    return render(request, 'movies/landing_page.html', {
+    return render(request, 'movies/movie_page.html', {
         'movies': data,
         'category': category,
         'search_query': search_query,
@@ -50,6 +56,7 @@ def landingPage(request):
         'page': page,
         'next_page': next_page
     })
+
 
 
 
