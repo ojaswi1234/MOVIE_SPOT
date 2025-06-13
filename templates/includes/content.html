@@ -1,9 +1,24 @@
-<div class="flex mt-24 justify-center text-center w-[550px] sm:w-fit h-fit px-28 sm:px-44 py-32 justify-self-center">
-    <h1 class="poppins-extrabold sm:text-6xl text-5xl text-center">
+
+<div class="flex mt-24 justify-center text-center w-[550px] sm:w-screen h-fit px-28 sm:px-44 py-32 justify-self-center "> 
+    <h1 class="poppins-extrabold sm:text-6xl text-5xl text-center md:relative ">
         Welcome to MovieSpot!<br/>Your Ultimate Movie Guide
-    </h1>
+    </h1>  
 </div>
 <div class="relative overflow-hidden flex flex-col mt-20 w-screen text-white mb-4 h-fit px-8 sm:px-16 py-8 justify-self-center" style="background-image: url('/static/images/parallax-bg.jpg'); background-attachment: fixed; background-size: cover; background-position: center;">
     <div class="bg-black bg-opacity-50 w-full h-full absolute top-0 left-0 z-0"></div>
     <h1 class="poppins-bold text-2xl text-center flex place-self-center relative z-10">Discover the best movies of all time</h1>
+</div>
+
+<div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
+  <h2 class="poppins-bold text-3xl text-center mt-10 mb-6">Featured Movies</h2>
+  <div class="absolute -top-5 left-[10%] right-[10%] h-10 sm:h-12 bg-black bg-opacity-70 rounded-full blur-xl z-[5]"></div>
+  {% load static %}
+  <div class="relative grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 min-h-[600px] sm:min-h-[650px]">
+    <img src="{% static 'images/one.jpg' %}" alt="Featured Movie 1" class="relative sm:absolute w-full sm:w-[260px] h-auto sm:h-[380px] max-w-[300px] mx-auto sm:top-5 sm:left-[5%] sm:-rotate-6 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[2]">
+    <img src="{% static 'images/two.jpg' %}" alt="Featured Movie 2" class="relative sm:absolute w-full sm:w-[300px] h-auto sm:h-[400px] max-w-[300px] mx-auto sm:top-12 sm:left-[25%] sm:rotate-3 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[3]">
+    <img src="{% static 'images/three.jpg' %}" alt="Featured Movie 3" class="relative sm:absolute w-full sm:w-[280px] h-auto sm:h-[390px] max-w-[300px] mx-auto sm:top-8 sm:left-[45%] sm:-rotate-2 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[4]">
+    <img src="{% static 'images/four.jpg' %}" alt="Featured Movie 4" class="relative sm:absolute w-full sm:w-[300px] h-auto sm:h-[400px] max-w-[300px] mx-auto sm:top-14 sm:left-[65%] sm:rotate-6 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[3]">
+    <img src="{% static 'images/five.jpg' %}" alt="Featured Movie 5" class="relative sm:absolute w-full sm:w-[270px] h-auto sm:h-[380px] max-w-[300px] mx-auto sm:top-48 sm:left-[15%] sm:rotate-4 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[2]">
+    <img src="{% static 'images/six.jpg' %}" alt="Featured Movie 6" class="relative sm:absolute w-full sm:w-[290px] h-auto sm:h-[390px] max-w-[300px] mx-auto sm:top-44 sm:left-[55%] sm:-rotate-4 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[3]">
+  </div>
 </div>

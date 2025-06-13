@@ -44,6 +44,29 @@
     .list-none{
         list-style: none;
     }
+    body{
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+    }
+    .animated-gradient2 {
+         color: black;
+            background: radial-gradient(circle at bottom,rgb(255, 255, 255),rgba(209, 254, 6, 0.87),rgba(2, 255, 255, 0.84));
+            background-size: 400% 400%;
+            animation: gradientAnimation 7s ease alternate-reverse infinite;
+    }
+        .animated-gradient:hover {
+            color: black;
+            background: radial-gradient(circle at bottom,rgb(255, 255, 255),rgba(209, 254, 6, 0.87),rgba(2, 255, 255, 0.84));
+            background-size: 400% 400%;
+            animation: gradientAnimation 7s ease alternate-reverse infinite;
+        }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%;  }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            0% { background-position: 0% 50%;  }
+        }
     
 </style>
 
