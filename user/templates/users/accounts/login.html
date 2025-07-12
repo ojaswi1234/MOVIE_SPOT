@@ -37,7 +37,12 @@
         <h1 class="text-3xl sm:text-4xl font-extrabold text-center mb-8 gradient-text tracking-tight drop-shadow-xl">
             Sign In to Movie Spot
         </h1>
-        <form method="post" class="space-y-6">
+        <form method="post" class="space-y-6" action="{% url 'login' %}">
+            {% if form.non_field_errors %}
+                <div class="text-red-500 text-sm mb-4">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
             {% csrf_token %}
             {% for field in form %}
                 <div>

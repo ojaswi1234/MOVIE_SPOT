@@ -1,12 +1,28 @@
-
-<header class="sm:w-[430px] h-6 bg-white/8 text-white p-6 rounded-full backdrop-blur-lg sticky lg:top-5 lg:left-[35%] z-10 w-[300px] hidden lg:block ">
-    <div class="h-full flex justify-center items-center">
-        <nav>
-            <ul class="flex flex-row gap-5 justify-center items-center">
-                <li class="sm:w-28 sm:p-2 bg-trasparent animated-gradient rounded-full flex justify-center items-center transition-all duration-300"><a href="/">Home</a></li>
-                <li class="sm:w-28 sm:p-2 bg-trasparent animated-gradient rounded-full flex justify-center items-center transition-all duration-300"><a href="/movie/">Movies</a></li>
-                <li class="sm:w-28 sm:p-2 bg-trasparent animated-gradient rounded-full flex justify-center items-center transition-all duration-300"><a href="/contact/">Contact</a></li>
-            </ul>
-        </nav>
-    </div> 
+<header class="w-full h-20 bg-transparent sticky top-0 z-50 lg:ml-5 flex flex-row justify-between items-center px-5 lg:px-10">
+    <div class="sm:w-[430px] h-6 bg-white/8 text-white p-6 rounded-full backdrop-blur-lg sticky lg:top-5 lg:left-[35%] z-10 w-[300px] hidden lg:block">
+        <div class="h-full flex justify-center items-center">
+            <nav>
+                <ul class="flex flex-row gap-5 justify-center items-center">
+                    <li class="sm:w-28 sm:p-2 bg-trasparent animated-gradient rounded-full flex justify-center items-center transition-all duration-300"><a href="/">Home</a></li>
+                    <li class="sm:w-28 sm:p-2 bg-trasparent animated-gradient rounded-full flex justify-center items-center transition-all duration-300"><a href="/movie/">Movies</a></li>
+                    <li class="sm:w-28 sm:p-2 bg-trasparent animated-gradient rounded-full flex justify-center items-center transition-all duration-300"><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="flex items-center gap-2 ml-auto">
+        {% if user.is_authenticated %}
+            
+            <a href="/user/profile/" class="text-white/80 hover:text-white transition-all duration-300"><span class="text-white/80">Welcome, {{ user.username }}</span></a>
+            <span class="text-white/80  font-bold flex justify-self-center place-self-center "></span>
+            <form method="post" class="flex items-center" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="text-white/80 hover:text-white transition-all duration-300" formaction="/user/logout/">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login'  %}" class="text-white/80 hover:text-white transition-all duration-300">Login</a>
+            <span class="text-white/80 text-2xl"> | </span>
+            <a href="{% url 'register' %}" class="text-white/80 hover:text-white transition-all duration-300">Register</a>
+        {% endif %}
+    </div>
 </header>
