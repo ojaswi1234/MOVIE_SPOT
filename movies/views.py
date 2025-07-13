@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 import requests
+from django.contrib.auth.decorators import login_required
 
 API_KEY = settings.TMDB_API_KEY
 
@@ -10,17 +11,17 @@ def landingPage(request):
    
 
    
+@login_required(login_url='/user/login/')
 def moviePage(request):
-    
     category = request.GET.get('category', 'popular')
-    search_query = request.GET.get("search","")
+    search_query = request.GET.get("search", "")
     page = int(request.GET.get('page', 1))
     next_page = page + 1
 
     print(f'API_KEY: {API_KEY}')  # Debug print statement to verify API key
     base_url = "https://api.themoviedb.org/3/movie/"
 
-    if search_query: 
+    if search_query:
         url = f"https://api.themoviedb.org/3/search/movie?api_key={API_KEY}&query={search_query}&page={page}"
     else:
         url = f"{base_url}{category}?api_key={API_KEY}&page={page}"
@@ -34,10 +35,9 @@ def moviePage(request):
         print(f'Error: {e}')
         data = []
 
-    
     error_message = f"Oops!! Something went wrong!"
 
-    if(request.headers.get("HX-Request")):
+    if request.headers.get("HX-Request"):
         return render(request, 'movies/partials/_movies_list.html', {
             'movies': data,
             'category': category,
@@ -46,8 +46,7 @@ def moviePage(request):
             'page': page,
             'next_page': next_page
         })
-    
-    
+
     return render(request, 'movies/movie_page.html', {
         'movies': data,
         'category': category,

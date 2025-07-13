@@ -13,7 +13,7 @@
     <div class="flex items-center gap-2 ml-auto">
         {% if user.is_authenticated %}
             
-            <a href="/user/profile/" class="text-white/80 hover:text-white transition-all duration-300"><span class="text-white/80">Welcome, {{ user.username }}</span></a>
+            <a href="/user/accounts/profile/" class="text-white/80 hover:text-white transition-all duration-300"><span class="text-white/80">Welcome, {{ user.username }}</span></a>
             <span class="text-white/80  font-bold flex justify-self-center place-self-center "></span>
             <form method="post" class="flex items-center" action="{% url 'logout' %}">
                 {% csrf_token %}

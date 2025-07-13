@@ -12,6 +12,9 @@ class Login(LoginView):
         login(self.request, form.get_user())
         return super().form_valid(form)
     
+    def get_success_url(self):
+        return '/'
+    
     
 
 class Logout(LogoutView):
@@ -23,6 +26,7 @@ class RegisterUser(FormView):
     form_class= RegisterUserForm
     success_url = "/"
 
+    
     def form_valid(self, form):
        user = form.save()
        login(self.request, user)
