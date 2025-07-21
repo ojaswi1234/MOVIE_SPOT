@@ -66,6 +66,7 @@ def moviePage(request):
         return render(request, 'movies/partials/_movies_list.html', context)
     return render(request, 'movies/movie_page.html', context)
 
+@login_required(login_url='/user/login/')
 def movieDetails(request, movie_id):
     movie_detail_url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}"
     movie_credit_url = f"https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key={API_KEY}"

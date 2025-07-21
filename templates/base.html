@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -79,6 +81,8 @@
   font-optical-sizing: auto;
   font-weight: bold;
   font-style: normal;
+    font-size: 1.5rem;
+    
   font-variation-settings:
     "slnt" 0,
     "CRSV" 0.5,
@@ -104,6 +108,15 @@
         color: black;
         box-shadow: 0 0 60px rgba(0, 234, 238, 0.7), 0 0 80px rgba(245, 253, 0, 0.7);
     }
+
+  
+
+/* style the label itself using :has (supported in modern browsers) */
+label:has(input[type="checkbox"]:checked) {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
 </style>
 
 <body class="overflow-x-hidden w-screen h-screen">
@@ -149,57 +162,7 @@
                 dislikeBtn.querySelector('svg').classList.toggle('fill-black');
             });
 
-            //  Code for AI Button  
-
-
-            const aiBtn = document.querySelector('#ai-btn');
-            if (aiBtn) {
-                aiBtn.addEventListener('click', function() {
-                    const body = document.querySelector('body');
-                    body.style.overflow = 'hidden';
-                    
-                    // Create backdrop
-                    const backdrop = document.createElement('div');
-                    backdrop.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center';
-                    
-                    // Create modal
-                    const aiDiv = document.createElement('div');
-                    aiDiv.className = 'w-80 h-60 bg-white rounded-lg flex flex-col justify-center items-center relative shadow-2xl';
-                    aiDiv.innerHTML = `
-                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
-                        <h3 class="text-xl font-bold mb-4 text-black">AI Movie Recommendations</h3>
-                        <p class="text-gray-600 mb-6 text-center px-4">Get personalized movie recommendations based on your preferences</p>
-                        <a href="/predict" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors">
-                            Get Recommendations
-                        </a>
-                    `;
-                    
-                    // Add modal to backdrop
-                    backdrop.appendChild(aiDiv);
-                    body.appendChild(backdrop);
-                    
-                    // Close modal functionality
-                    const closeBtn = aiDiv.querySelector('button');
-                    const closeModal = () => {
-                        body.style.overflow = '';
-                        backdrop.remove();
-                    };
-                    
-                    closeBtn.addEventListener('click', closeModal);
-                    backdrop.addEventListener('click', (e) => {
-                        if (e.target === backdrop) closeModal();
-                    });
-                    
-                    // ESC key to close
-                    document.addEventListener('keydown', function(e) {
-                        if (e.key === 'Escape') closeModal();
-                    }, { once: true });
-                });
-            }
         });
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>

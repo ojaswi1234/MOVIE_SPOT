@@ -3,6 +3,13 @@
         <h1 class="poppins-extrabold translate-x-[140%] text-xl">{{ error_message }}</h1>
         {% endif %}-->
         {% load static %}
+         <button 
+  id="ai-btn" 
+  class="bitcount ai-button  w-14 h-14 fixed rounded-full flex justify-center items-center right-5 bottom-6 z-50  text-white  "
+  aria-label="Open AI movie recommendations"
+>
+  AI
+</button>
         {% for movie in movies %}
         <a href="{% url 'movie_details' movie.id %}" class="no-underline flex justify-center justify-self-center place-self-center hover:scale-105 transition-all duration-300 ease-in-out">
             <div class="flex flex-col justify-center items-center w-[300px] h-[450px] rounded-lg shadow-md p-4 bg-white/10 hover:bg-white/20 transition-colors">
