@@ -1,3 +1,15 @@
-requests
+asgiref
+certifi
+charset-normalizer
+dj-database-url
+Django
+gunicorn
+idna
+packaging
+psycopg2-binary
 python-dotenv
-django
+requests
+sqlparse
+tzdata
+urllib3
+whitenoise

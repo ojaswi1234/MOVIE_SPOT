@@ -34,3 +34,13 @@ class RegisterUser(FormView):
        return super().form_valid(form)
     
 
+class ContactView(FormView):
+    template_name = "users/accounts/contact.html"
+    form_class = None  # Replace with your actual form class if needed
+    success_url = "/"
+
+    def form_valid(self, form):
+        # Handle the form submission logic here
+        return super().form_valid(form)
+
+

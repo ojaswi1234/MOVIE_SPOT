@@ -13,6 +13,7 @@
     
 </head> 
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');   
     .poppins-extrabold {
       font-family: "Poppins", sans-serif;
@@ -25,6 +26,7 @@
         animation: hue 2s linear infinite;
         text-shadow: 1px 1px 200px yellow;
     }
+     
     @keyframes hue{
          to{
             background-position: 200%;
@@ -71,7 +73,37 @@
             50% { background-position: 100% 50%; }
             0% { background-position: 0% 50%;  }
         }
-    
+
+        .bitcount {
+  font-family: "Bitcount Prop Single", system-ui;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0,
+    "CRSV" 0.5,
+    "ELSH" 0,
+    "ELXP" 0;
+}
+   
+    #ai-btn {
+         background: transparent;
+         border: 2px solid white;
+        color: white;
+        border-radius: 50%;
+        box-shadow: 0 0 44px rgb(255, 255, 255);
+        transition: background 0.3s ease, transform 0.5s ease;
+       cursor: pointer;
+        
+    }
+    #ai-btn:hover {
+        border: 2px solid transparent;
+        animation: hue 0.56s infinite;
+        background: radial-gradient(circle,rgb(0, 234, 238) 0%,rgb(245, 253, 0) 100%, rgb(0, 234, 238) 0%, rgb(245, 253, 0) 100%);
+        transform: scale(1.1);
+        color: black;
+        box-shadow: 0 0 60px rgba(0, 234, 238, 0.7), 0 0 80px rgba(245, 253, 0, 0.7);
+    }
 </style>
 
 <body class="overflow-x-hidden w-screen h-screen">
@@ -87,34 +119,87 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
+    <!-- Move this script to the end of body -->
     <script>
-        const tl = gsap.timeline({defaults: {duration: 0.6}});
-        tl.from('.poppins-extrabold', {y: -100, opacity: 0, stagger: 0.2});
-        tl.from('.poppins-bold', {y: -100, opacity: 0, stagger: 0.1});
-       
-        tl.from('.size-52', {y: -100, opacity: 0, stagger: 0.025});
+        document.addEventListener('DOMContentLoaded', function() {
+            const tl = gsap.timeline({defaults: {duration: 0.6}});
+            tl.from('.poppins-extrabold', {y: -100, opacity: 0, stagger: 0.2});
+            tl.from('.poppins-bold', {y: -100, opacity: 0, stagger: 0.1});
+           
+            tl.from('.size-52', {y: -100, opacity: 0, stagger: 0.025});
 
 
-        const likeBtn = document.getElementById('like-btn');
-        const dislikeBtn = document.getElementById('dislike-btn');
+            const likeBtn = document.getElementById('like-btn');
+            const dislikeBtn = document.getElementById('dislike-btn');
 
-        likeBtn.addEventListener('click', function() {
-            likeBtn.classList.toggle('bg-white');
-            likeBtn.classList.toggle('bg-red-500');
-            likeBtn.classList.toggle('text-white');
-            likeBtn.classList.toggle('text-black');
-            likeBtn.querySelector('svg').classList.toggle('fill-white');
-            likeBtn.querySelector('svg').classList.toggle('fill-black');
+            likeBtn.addEventListener('click', function() {
+                likeBtn.classList.toggle('bg-white');
+                likeBtn.classList.toggle('bg-red-500');
+                likeBtn.classList.toggle('text-white');
+                likeBtn.classList.toggle('text-black');
+                likeBtn.querySelector('svg').classList.toggle('fill-white');
+                likeBtn.querySelector('svg').classList.toggle('fill-black');
+            });
+            dislikeBtn.addEventListener('click', function() {
+                dislikeBtn.classList.toggle('bg-red-500');
+                dislikeBtn.classList.toggle('bg-white');
+                dislikeBtn.classList.toggle('text-white');
+                dislikeBtn.classList.toggle('text-black');
+                dislikeBtn.querySelector('svg').classList.toggle('fill-white');
+                dislikeBtn.querySelector('svg').classList.toggle('fill-black');
+            });
+
+            //  Code for AI Button  
+
+
+            const aiBtn = document.querySelector('#ai-btn');
+            if (aiBtn) {
+                aiBtn.addEventListener('click', function() {
+                    const body = document.querySelector('body');
+                    body.style.overflow = 'hidden';
+                    
+                    // Create backdrop
+                    const backdrop = document.createElement('div');
+                    backdrop.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center';
+                    
+                    // Create modal
+                    const aiDiv = document.createElement('div');
+                    aiDiv.className = 'w-80 h-60 bg-white rounded-lg flex flex-col justify-center items-center relative shadow-2xl';
+                    aiDiv.innerHTML = `
+                        <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                        <h3 class="text-xl font-bold mb-4 text-black">AI Movie Recommendations</h3>
+                        <p class="text-gray-600 mb-6 text-center px-4">Get personalized movie recommendations based on your preferences</p>
+                        <a href="/predict" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors">
+                            Get Recommendations
+                        </a>
+                    `;
+                    
+                    // Add modal to backdrop
+                    backdrop.appendChild(aiDiv);
+                    body.appendChild(backdrop);
+                    
+                    // Close modal functionality
+                    const closeBtn = aiDiv.querySelector('button');
+                    const closeModal = () => {
+                        body.style.overflow = '';
+                        backdrop.remove();
+                    };
+                    
+                    closeBtn.addEventListener('click', closeModal);
+                    backdrop.addEventListener('click', (e) => {
+                        if (e.target === backdrop) closeModal();
+                    });
+                    
+                    // ESC key to close
+                    document.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape') closeModal();
+                    }, { once: true });
+                });
+            }
         });
-        dislikeBtn.addEventListener('click', function() {
-            dislikeBtn.classList.toggle('bg-red-500');
-            dislikeBtn.classList.toggle('bg-white');
-            dislikeBtn.classList.toggle('text-white');
-            dislikeBtn.classList.toggle('text-black');
-            dislikeBtn.querySelector('svg').classList.toggle('fill-white');
-            dislikeBtn.querySelector('svg').classList.toggle('fill-black');
-        });
-        {# heelo #}
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
