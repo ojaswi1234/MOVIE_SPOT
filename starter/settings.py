@@ -19,7 +19,7 @@ load_dotenv()  # Ensure this line is added to load environment variables
 TMDB_API_KEY = os.getenv('TMDB_API_KEY')
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+NPM_BIN_PATH = os.getenv('NPM_BIN_PATH', 'npm')  # Use environment variable or default to 'npm'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -44,7 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user.apps.UserConfig',
     'movies',
+    'tailwind',
+    'theme',
+    'django_browser_reload',
 ]
+TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_browser_reload.middleware.BrowserReloadMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise middleware
 ]
 
@@ -134,3 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.CustomUser'
 
 LOGIN_REDIRECT_URL = '/'
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

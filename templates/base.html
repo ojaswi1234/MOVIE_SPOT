@@ -1,14 +1,16 @@
-{% load static %}
+
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Movie Spot{% endblock %}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    {% tailwind_css %}
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/loader.js' %}"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
@@ -58,9 +60,15 @@
     }
     .animated-gradient2 {
          color: black;
-            background: radial-gradient(circle at bottom,rgb(255, 255, 255),rgba(209, 254, 6, 0.87),rgba(2, 255, 255, 0.84));
+            background: radial-gradient(circle at center,lime,yellow,lime);
             background-size: 400% 400%;
             animation: gradientAnimation 7s ease alternate-reverse infinite;
+    }
+     .animated-gradient3 {
+         color: black;
+            background: radial-gradient(circle at center,rgba(209, 254, 6, 0.87),cyan,rgba(209, 254, 6, 0.87));
+            background-size: 400% 400%;
+            animation: gradientAnimation 4s ease alternate infinite;
     }
         .animated-gradient:hover {
             color: black;
@@ -68,6 +76,9 @@
             background-size: 400% 400%;
             animation: gradientAnimation 7s ease alternate-reverse infinite;
         }
+
+        
+
         @keyframes gradientAnimation {
             0% { background-position: 0% 50%;  }
             50% { background-position: 100% 50%; }
@@ -117,10 +128,107 @@ label:has(input[type="checkbox"]:checked) {
     color: white;
     border-color: #4CAF50;
 }
+
+/* From Uiverse.io by jeremyssocial */ 
+@keyframes blinkCursor {
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes typeAndDelete {
+  0%,
+  10% {
+    width: 0;
+  }
+  45%,
+  55% {
+    width: 6.2em;
+  } /* adjust width based on content */
+  90%,
+  100% {
+    width: 0;
+  }
+}
+
+.terminal-loader {
+  border: 0.1em solid #333;
+  background-color: #1a1a1a;
+  color: #0f0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 1em;
+  padding: 1.5em 1em;
+  width: 12em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.terminal-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+  background-color: #333;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding: 0 0.4em;
+  box-sizing: border-box;
+}
+
+.terminal-controls {
+  float: right;
+}
+
+.control {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  margin-left: 0.4em;
+  border-radius: 50%;
+  background-color: #777;
+}
+
+.control.close {
+  background-color: #e33;
+}
+
+.control.minimize {
+  background-color: #ee0;
+}
+
+.control.maximize {
+  background-color: #0b0;
+}
+
+.terminal-title {
+  float: left;
+  line-height: 1.5em;
+  color: #eee;
+}
+
+.text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.2em solid green; /* Cursor */
+  animation:
+    typeAndDelete 4s steps(11) infinite,
+    blinkCursor 0.5s step-end infinite alternate;
+  margin-top: 1.5em;
+}
+
+
+
+
+
 </style>
 
-<body class="overflow-x-hidden w-screen h-screen">
-    <main class="w-screen h-screen overflow-x-hidden bg-black p-10 sm:p-0">
+<body class="animated-gradient3 overflow-x-hidden w-screen h-screen px-3  py-3 flex justify-center items-center ">
+    <main class="w-full h-full overflow-x-hidden bg-black p-10 sm:p-0 rounded-4xl">
         {% block navbar %}
         {% include 'includes/navbar.html' %}
         {% endblock %}
@@ -128,13 +236,29 @@ label:has(input[type="checkbox"]:checked) {
         {% block content %}
          {% include 'includes/content.html'%}
         {% endblock %}
-        
+       <!-- From Uiverse.io by jeremyssocial --> 
+<div id="loader" class="terminal-loader">
+  <div class="terminal-header">
+    <div class="terminal-title">Status</div>
+    <div class="terminal-controls">
+      <div class="control close"></div>
+      <div class="control minimize"></div>
+      <div class="control maximize"></div>
+    </div>
+  </div>
+  <div class="text">Loading...</div>
+</div>
+
+
+
     </main>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 
     <!-- Move this script to the end of body -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const gsap = window.gsap;
+            gsap.registerPlugin(ScrollTrigger);
             const tl = gsap.timeline({defaults: {duration: 0.6}});
             tl.from('.poppins-extrabold', {y: -100, opacity: 0, stagger: 0.2});
             tl.from('.poppins-bold', {y: -100, opacity: 0, stagger: 0.1});
@@ -160,9 +284,13 @@ label:has(input[type="checkbox"]:checked) {
                 dislikeBtn.classList.toggle('text-black');
                 dislikeBtn.querySelector('svg').classList.toggle('fill-white');
                 dislikeBtn.querySelector('svg').classList.toggle('fill-black');
-            });
+            }); 
+
+           
+
 
         });
+
     </script>
 </body>
 </html>

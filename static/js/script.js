@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
       </button>
     <p class="text-center mb-4">Get personalized movie recommendations based on your preferences.(Choose any of these)</p>
 
-    <form action="/movies/ai-recommendations/" method="POST" class=" ">
+    <form action="/movies/ai-recommendations/" method="POST" class=" text-black ">
 
     <div id="genre-titles" class="flex flex-wrap justify-center mb-4 gap-y-2">
         <label class="flex items-center mr-4 p-3 rounded-full border-2 border-gray-400 cursor-pointer ">
-            <span class="mr-2">Action</span>
+            <span class="mr-2 text-black">Action</span>
             <input type="checkbox" name="genre" value="Action" class="absolute w-fit h-fit opacity-0">
         </label>
         <label class="flex items-center mr-4 p-3 rounded-full border-2 border-gray-400 cursor-pointer">
@@ -127,4 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   aiBtn.addEventListener('click', openModal);
+
+
+ 
+   
+
 });

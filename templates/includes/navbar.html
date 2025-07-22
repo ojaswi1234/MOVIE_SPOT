@@ -1,4 +1,4 @@
-<header class="w-full h-20 bg-black lg:bg-transparent rounded-full lg:rounded-none sticky top-0 z-50 lg:ml-5 flex flex-row justify-between items-center px-5 lg:px-10">
+<header class="w-full h-20 bg-black lg:bg-transparent rounded-full lg:rounded-none sticky top-0 lg:relative lg:top-0 z-50 lg:ml-5 flex flex-row justify-between items-center px-5 lg:px-10">
     <div class=" w-fit h-fit ">
      {% if user.is_authenticated %}
             
@@ -11,7 +11,7 @@
             <a href="{% url 'register' %}" class="text-white/80 hover:text-white transition-all duration-300">Register</a>
         {% endif %}
     </div>
-    <div class="sm:w-[430px] h-6 bg-white/8 text-white p-6 rounded-full backdrop-blur-lg sticky lg:top-5 lg:left-[35%] z-10 w-[300px] hidden lg:block">
+    <div class="sm:w-[430px] h-6 bg-white/8 text-white p-6 rounded-full backdrop-blur-lg fixed lg:top-5 lg:left-[35%] z-10 w-[300px] hidden lg:block">
         <div class="h-full flex justify-center items-center">
             <nav>
                 <ul class="flex flex-row gap-5 justify-center items-center">
@@ -28,7 +28,7 @@
            
             <form method="post" class="flex items-center hidden lg:block " action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button type="submit" class="text-red-500  hover:text-white transition-all duration-300" formaction="/user/logout/">Logout</button>
+                <button type="submit" class="text-red-500 cursor-pointer  hover:text-white transition-all duration-300" formaction="/user/logout/">Logout</button>
             </form>
             
         {% else %}
