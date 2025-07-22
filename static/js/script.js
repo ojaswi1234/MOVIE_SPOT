@@ -129,6 +129,27 @@ document.addEventListener('DOMContentLoaded', () => {
   aiBtn.addEventListener('click', openModal);
 
 
+  // Ensure ScrollTrigger is available before registering
+  // Animate collage images on scroll
+// if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+//   gsap.registerPlugin(ScrollTrigger);
+//   gsap.from("#collage img", {
+//     scrollTrigger: {
+//       trigger: "#collage",
+//       start: "top 80%",
+//       toggleActions: "play none none reverse",
+//       markers: true // set to true for debugging
+//     },
+//     y: 100,
+//     opacity: 0,
+//     stagger: 0.15,
+//     duration: 0.8,
+//     ease: "power3.out"
+//   });
+//}
+
+  
+
  
    
 

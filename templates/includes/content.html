@@ -13,13 +13,41 @@
   <h2 class="poppins-bold text-3xl text-center mt-10 mb-6">Featured Movies</h2>
   <div class="absolute -top-5 left-[10%] right-[10%] h-10 sm:h-12 bg-black bg-opacity-70 rounded-full blur-xl z-[5]"></div>
   {% load static %}
-  <div class="relative grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 min-h-[600px] sm:min-h-[650px]">
+  <div id="collage" class="collage relative grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 min-h-[600px] sm:min-h-[650px]">
     <img src="{% static 'images/one.jpg' %}" alt="Featured Movie 1" class="relative sm:absolute w-full sm:w-[260px] h-auto sm:h-[380px] max-w-[300px] mx-auto sm:top-5 sm:left-[5%] sm:-rotate-6 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[2]">
     <img src="{% static 'images/two.jpg' %}" alt="Featured Movie 2" class="relative sm:absolute w-full sm:w-[300px] h-auto sm:h-[400px] max-w-[300px] mx-auto sm:top-12 sm:left-[25%] sm:rotate-3 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[3]">
     <img src="{% static 'images/three.jpg' %}" alt="Featured Movie 3" class="relative sm:absolute w-full sm:w-[280px] h-auto sm:h-[390px] max-w-[300px] mx-auto sm:top-8 sm:left-[45%] sm:-rotate-2 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[4]">
     <img src="{% static 'images/four.jpg' %}" alt="Featured Movie 4" class="relative sm:absolute w-full sm:w-[300px] h-auto sm:h-[400px] max-w-[300px] mx-auto sm:top-14 sm:left-[65%] sm:rotate-6 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[3]">
     <img src="{% static 'images/five.jpg' %}" alt="Featured Movie 5" class="relative sm:absolute w-full sm:w-[270px] h-auto sm:h-[380px] max-w-[300px] mx-auto sm:top-48 sm:left-[15%] sm:rotate-4 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[2]">
     <img src="{% static 'images/six.jpg' %}" alt="Featured Movie 6" class="relative sm:absolute w-full sm:w-[290px] h-auto sm:h-[390px] max-w-[300px] mx-auto sm:top-44 sm:left-[55%] sm:-rotate-4 object-cover rounded-lg shadow-2xl sm:hover:scale-105 sm:transition-transform sm:duration-300 sm:z-[3]">
+  </div>
+  <div class="mt-24 flex flex-col items-center text-white">
+    <h1 class="poppins-bold text-2xl md:text-5xl mb-4 text-center">Why MovieSpot?</h1>
+    <p class="text-lg text-gray-200 max-w-2xl text-center mb-8">
+      MovieSpot brings you curated recommendations, trending releases, and timeless classics. Explore genres, discover hidden gems, and stay updated with the latest in cinema—all in one place. Plus, get personalized suggestions with our built-in AI movie recommender!
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 sm:grid-rows-4 gap-8 w-full max-w-5xl">
+      <div class="bg-gray-900 bg-opacity-80 rounded-lg p-6 flex flex-col items-center shadow-lg">
+        <span class="text-4xl mb-2">🎬</span>
+        <h4 class="poppins-semibold text-xl mb-2">Curated Picks</h4>
+        <p class="text-gray-300 text-center">Handpicked movies for every mood and occasion, updated regularly by our team.</p>
+      </div>
+      <div class="bg-gray-900 bg-opacity-80 rounded-lg p-6 flex flex-col items-center shadow-lg">
+        <span class="text-4xl mb-2">⭐</span>
+        <h4 class="poppins-semibold text-xl mb-2">Top Rated</h4>
+        <p class="text-gray-300 text-center">Browse the highest-rated movies based on user reviews and critic scores.</p>
+      </div>
+      <div class="bg-gray-900 bg-opacity-80 rounded-lg p-6 flex flex-col items-center shadow-lg">
+        <span class="text-4xl mb-2">🔍</span>
+        <h4 class="poppins-semibold text-xl mb-2">Easy Discovery</h4>
+        <p class="text-gray-300 text-center">Find movies by genre, year, or popularity with our intuitive search and filter tools.</p>
+      </div>
+      <div class="bg-gray-900 bg-opacity-80 rounded-lg p-6 flex flex-col items-center shadow-lg">
+        <span class="text-4xl mb-2">🤖</span>
+        <h4 class="poppins-semibold text-xl mb-2">AI Recommender</h4>
+        <p class="text-gray-300 text-center">Get personalized movie suggestions powered by our smart AI recommender system.</p>
+      </div>
+    </div>
   </div>
 
   

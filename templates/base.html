@@ -8,12 +8,12 @@
     <title>{% block title %}Movie Spot{% endblock %}</title>
     {% tailwind_css %}
     <script src="https://unpkg.com/htmx.org@2.0.4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <script src="{% static 'js/gsap/gsap.min.js' %}"></script>
+    <script src="{% static 'js/gsap/ScrollTrigger.min.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/loader.js' %}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Physics2DPlugin.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+
     
 </head> 
 <style>
@@ -227,7 +227,7 @@ label:has(input[type="checkbox"]:checked) {
 
 </style>
 
-<body class="animated-gradient3 overflow-x-hidden w-screen h-screen px-3  py-3 flex justify-center items-center ">
+<body class="animated-gradient3  w-screen h-screen px-3  py-3 flex justify-center items-center ">
     <main class="w-full h-full overflow-x-hidden bg-black p-10 sm:p-0 rounded-4xl">
         {% block navbar %}
         {% include 'includes/navbar.html' %}
@@ -252,9 +252,7 @@ label:has(input[type="checkbox"]:checked) {
 
 
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-
-    <!-- Move this script to the end of body -->
+   
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const gsap = window.gsap;
@@ -263,7 +261,7 @@ label:has(input[type="checkbox"]:checked) {
             tl.from('.poppins-extrabold', {y: -100, opacity: 0, stagger: 0.2});
             tl.from('.poppins-bold', {y: -100, opacity: 0, stagger: 0.1});
            
-            tl.from('.size-52', {y: -100, opacity: 0, stagger: 0.025});
+       
 
 
             const likeBtn = document.getElementById('like-btn');
@@ -287,7 +285,6 @@ label:has(input[type="checkbox"]:checked) {
             }); 
 
            
-
 
         });
 
