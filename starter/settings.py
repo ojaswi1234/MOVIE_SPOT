@@ -25,12 +25,12 @@ NPM_BIN_PATH = os.getenv('NPM_BIN_PATH', 'npm')  # Use environment variable or d
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-0^7)icer1+6q14^xi=@%4ya6b%*tr7o5)4^g!vfs3n+in#(1wi'
+SECRET_KEY = os.getenv('SECRET_KEY', 'secret-key-for-dev-only')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['movie-spot.onrender.com']
 
 
 # Application definition
